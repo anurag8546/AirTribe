@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Routes, Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import EditTask from './components/EditTask';
-
+import './App.css'
 const App = () => {
   const navigate = useNavigate();
 
@@ -117,9 +117,10 @@ const App = () => {
 
   return (
 
-      <div>
+      <div className='mainDiv'>
         {status.map((status) => (
           <div
+          className='status-column'
             key={status}
             onDrop={(e) => handleDrop(e, status)}
             onDragOver={(e) => handleDragOver(e)}

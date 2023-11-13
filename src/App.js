@@ -74,7 +74,6 @@ const App = () => {
     newTasks[status] = newTasks[status].filter((task) => task.id !== taskId);
     setTasks(newTasks);
   };
-
   const handleDragStart = (e, status, taskId) => {
     e.dataTransfer.setData('status', status);
     e.dataTransfer.setData('taskId', taskId);
@@ -84,33 +83,32 @@ const App = () => {
     e.preventDefault();
     const sourceStatus = e.dataTransfer.getData('status');
     const taskId = parseInt(e.dataTransfer.getData('taskId'));
-    e.preventDefault();
-    
-  
+    console.log("SS");
+    console.log(sourceStatus);
+    console.log("TS");
+  console.log(targetStatus);
+  console.log("TI");
+  console.log(taskId);
     if (taskId!== undefined && !isNaN(taskId)) {
     // Ensure that both sourceStatus and targetStatus are valid keys
     if (!tasks[sourceStatus] || !tasks[targetStatus]) {
       console.error('Invalid source or target status:', sourceStatus, targetStatus);
       return;
-    }
-  
+    }  
     // Update the task status
     const updatedTasks = { ...tasks };
-  
+    console.log(updatedTasks);
     // Filter out the task from the sourceStatus
-    updatedTasks[sourceStatus] = (updatedTasks[sourceStatus] || []).filter((task) => task.id !== taskId);
-  
+    updatedTasks[sourceStatus] = (updatedTasks[sourceStatus]).filter((task) => task.id != taskId);
+    console.log(updatedTasks);
     // Ensure that updatedTasks[targetStatus] is an array
     updatedTasks[targetStatus] = Array.isArray(updatedTasks[targetStatus])
-      ? [...updatedTasks[targetStatus], { ...tasks[sourceStatus].find((task) => task.id === taskId), isEditing: true }]
+      ? [...updatedTasks[targetStatus], { ...tasks[sourceStatus].find((task) => task.id == taskId), isEditing: true }]
       : [{ ...tasks[sourceStatus].find((task) => task.id === taskId), isEditing: true }];
-  
+      console.log(updatedTasks);
     setTasks(updatedTasks);
   }
   };
-
-  
-  
   const handleDragOver = (e) => {
     e.preventDefault();
   };

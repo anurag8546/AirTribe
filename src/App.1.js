@@ -11,11 +11,11 @@ const App1 = () => {
   
 
   <div>
- <Router>
+   <Router>
       <Routes>
-    <Route path="*" element={<App />} />
-    <Route path="/edit/:taskId/:taskTitle" element={<EditTask />} />
-    </Routes>
+           <Route path="*" element={<App />} />
+           <Route path="/edit/:taskId/:taskTitle" element={<EditTask />} />
+      </Routes>
     </Router>
     </div>
 

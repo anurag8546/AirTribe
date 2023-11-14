@@ -40,13 +40,6 @@ const App = () => {
       });
     }
   };
-  const handleTaskClick = (taskId) => {
-    const newTasks = { ...tasks };
-    for (const status in newTasks) {
-      newTasks[status] = newTasks[status].map((task) => task.id === taskId ? { ...task, isEditing: true } : task);
-    }
-    setTasks(newTasks);
-  };
 
   const fetchTaskDetails = (taskId) => {
     const task = Array.isArray(tasks)
@@ -57,7 +50,7 @@ const App = () => {
 
   const handleTaskUpdate = (taskId, taskTitle) => {
     const Searchtask = fetchTaskDetails(taskId);
-    navigate(`/edit/${taskId}/${taskTitle}`, { state: { updateTaskTitle: Searchtask.title } });
+    navigate(`/edit/${taskId}/${taskTitle}`);
   };
 
   const updateTaskTitle = (taskId, newTitle) => {
@@ -69,11 +62,6 @@ const App = () => {
     setIsUpdating(true);
   };
 
-  const handleTaskDelete = (status, taskId) => {
-    const newTasks = { ...tasks };
-    newTasks[status] = newTasks[status].filter((task) => task.id !== taskId);
-    setTasks(newTasks);
-  };
   const handleDragStart = (e, status, taskId) => {
     e.dataTransfer.setData('status', status);
     e.dataTransfer.setData('taskId', taskId);
@@ -83,14 +71,14 @@ const App = () => {
     e.preventDefault();
     const sourceStatus = e.dataTransfer.getData('status');
     const taskId = parseInt(e.dataTransfer.getData('taskId'));
-    console.log("SS");
-    console.log(sourceStatus);
-    console.log("TS");
-  console.log(targetStatus);
-  console.log("TI");
-  console.log(taskId);
+  //   console.log("SS");
+  //   console.log(sourceStatus);
+  //   console.log("TS");
+  // console.log(targetStatus);
+  // console.log("TI");
+  // console.log(taskId);
     if (taskId!== undefined && !isNaN(taskId)) {
-    // Ensure that both sourceStatus and targetStatus are valid keys
+
     if (!tasks[sourceStatus] || !tasks[targetStatus]) {
       console.error('Invalid source or target status:', sourceStatus, targetStatus);
       return;

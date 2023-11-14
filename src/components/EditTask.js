@@ -6,13 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditTask = () => {
   const { taskId, taskTitle } = useParams();
 
-  // Use local state for simplicity, in a real app, fetch the data from an API
   const [title, setTitle] = useState(taskTitle);
 
     const navigate = useNavigate();
    
     
-    const updateTask = async (taskId, title) => {
+    const updateTask =  (taskId, title) => {
         let tasks = JSON.parse(localStorage.getItem('tasks'));
     //   console.log(tasks);
         if (!tasks || typeof tasks !== 'object' || !Array.isArray(tasks['Not Started']) || !Array.isArray(tasks['In Progress']) || !Array.isArray(tasks['Completed'])) {
@@ -41,7 +40,6 @@ const EditTask = () => {
       };
       
       const deleteTask = (taskId) => {
-        return new Promise((resolve, reject) => {
           let tasks = JSON.parse(localStorage.getItem('tasks'));
       
           if (!tasks || typeof tasks !== 'object' || !Array.isArray(tasks['Not Started']) || !Array.isArray(tasks['In Progress']) || !Array.isArray(tasks['Completed'])) {
@@ -54,14 +52,8 @@ const EditTask = () => {
             'In Progress': tasks['In Progress'].filter((task) => task.id != (taskId)),
             'Completed': tasks['Completed'].filter((task) => task.id != (taskId)),
           };
-      
-          try {
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-            resolve();
-          } catch (error) {
-            reject(error);
-          }
-        });
+
       };
 
       useEffect(() => {
@@ -74,28 +66,14 @@ const EditTask = () => {
       }, [taskId], [taskTitle]);
     
       const handleUpdate = () => {
-        updateTask(taskId, title)
-          .then(() => {
-            // alert('Task updated successfully');
-            // setTitle({title}); 
+        updateTask(taskId, title)         
             navigate('/');
-          })
-          .catch((error) => {
-            console.error('Failed to update task:', error);
-          });
       };
 
-
+      
       const handleDelete = () => {
         deleteTask(taskId)
-          .then(() => {
-            // alert('Task deleted successfully');
-            setTitle(''); // Reset the title state
             navigate('/');
-          })
-          .catch((error) => {
-            console.error('Failed to delete task:', error);
-          });
       };
     
  useEffect(() => {

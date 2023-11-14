@@ -53,14 +53,6 @@ const App = () => {
     navigate(`/edit/${taskId}/${taskTitle}`);
   };
 
-  const updateTaskTitle = (taskId, newTitle) => {
-    setTasks((prevTasks) =>
-      Array.isArray(prevTasks)
-        ? prevTasks.map((task) => (task.id === parseInt(taskId) ? { ...task, title: newTitle } : task))
-        : prevTasks
-    );
-    setIsUpdating(true);
-  };
 
   const handleDragStart = (e, status, taskId) => {
     e.dataTransfer.setData('status', status);

@@ -56,21 +56,12 @@ const EditTask = () => {
 
       };
 
-      useEffect(() => {
-        setTimeout(() => {
-          const fakeTaskDetails = {
-            title: 'Fake Task',
-          };
-          setTitle(fakeTaskDetails.title);
-        }, 500);
-      }, [taskId], [taskTitle]);
-    
       const handleUpdate = () => {
         updateTask(taskId, title)         
             navigate('/');
       };
 
-      
+
       const handleDelete = () => {
         deleteTask(taskId)
             navigate('/');

@@ -1,8 +1,8 @@
 .mainDiv{
   display: flex;
-  justify-content: space-around; /* Adjust as needed for spacing */
+  justify-content: space-around; 
   align-items: flex-start;
-  height: 100vh; /* 100% of the viewport height */
+  height: 100vh; 
   margin: 0;
 }
 .status-column {
@@ -11,5 +11,5 @@
   padding: 8px;
   border: 1px solid #ddd;
   margin: 8px;
-  max-width: 33%; /* Each column takes up a maximum of 33% of the width */
+  max-width: 33%; 
 }

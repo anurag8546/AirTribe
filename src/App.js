@@ -33,7 +33,7 @@ const App = () => {
     const title = prompt('Enter task title:');
     if (title !== null && title.trim() !== '') {
       setTasks((prevTasks) => {
-        const newTask = { id: Date.now(), title: title.trim(), description: '' };
+        const newTask = { id: Date.now(), title: title.trim()};
         const updatedTasks = { ...prevTasks, [status]: [...prevTasks[status], newTask] };
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         return updatedTasks;
@@ -41,15 +41,9 @@ const App = () => {
     }
   };
 
-  const fetchTaskDetails = (taskId) => {
-    const task = Array.isArray(tasks)
-      ? tasks.find((task) => task.id === parseInt(taskId))
-      : null;
-    return task || { id: '', title: '' };
-  };
 
   const handleTaskUpdate = (taskId, taskTitle) => {
-    const Searchtask = fetchTaskDetails(taskId);
+
     navigate(`/edit/${taskId}/${taskTitle}`);
   };
 
@@ -77,15 +71,15 @@ const App = () => {
     }  
     // Update the task status
     const updatedTasks = { ...tasks };
-    console.log(updatedTasks);
+    // console.log(updatedTasks);
     // Filter out the task from the sourceStatus
     updatedTasks[sourceStatus] = (updatedTasks[sourceStatus]).filter((task) => task.id != taskId);
-    console.log(updatedTasks);
+    // console.log(updatedTasks);
     // Ensure that updatedTasks[targetStatus] is an array
     updatedTasks[targetStatus] = Array.isArray(updatedTasks[targetStatus])
       ? [...updatedTasks[targetStatus], { ...tasks[sourceStatus].find((task) => task.id == taskId), isEditing: true }]
       : [{ ...tasks[sourceStatus].find((task) => task.id === taskId), isEditing: true }];
-      console.log(updatedTasks);
+      // console.log(updatedTasks);
     setTasks(updatedTasks);
   }
   };
